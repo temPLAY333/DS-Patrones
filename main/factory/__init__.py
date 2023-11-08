@@ -1,3 +1,2 @@
-from .TVFactoryABC import TVFactoryABC
-from .factoryLcdBlue import FactoryLcdBlue
-from .factoryPlasmaYellow import FactoryPlasmaYellow
+from .trianguloFactoryABC import TrianguloFactoryABC
+from .trianguloFactory import TrianguloFactory
