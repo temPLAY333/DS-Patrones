@@ -1,19 +1,13 @@
-from main.model import Book
-from main.model import Library
-from main.subject import AlarmBook
-from main.observer import Administration
-from main.observer import Stock
-from main.observer import Shopping
-
+from main.factory import FactoryLcdBlue, FactoryPlasmaYellow
 
 class Cliente():
 
     def run(self):
-        alarm = AlarmBook()
-        alarm.attach(Administration())
-        alarm.attach(Stock())
-        alarm.attach(Shopping())
-        book = Book(1, "Economia en una Leccion")
-        book.setState(0)
-        library = Library(alarm)
-        library.returnsBook(book)
+        factoryLCD = FactoryLcdBlue()
+        tv = factoryLCD.assemble()
+        print(f"Costo de produccion: {tv.getManufacturingCost()}")
+        print("\n")
+        factoryPlasma = FactoryPlasmaYellow()
+        tv = factoryPlasma.assemble()
+        print(f"Angulo de vision: {tv.getVisionAngle()}")
+        print(f"Tiempo de respuesta: {tv.getResponseTime()}")
