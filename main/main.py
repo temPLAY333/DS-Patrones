@@ -1,24 +1,18 @@
-from main.command import *
-from main.receiver import *
-from main.invoker import *
+from main.director import AutoDirector
+from main.builder import FiatBuilder, FordBuilder, AutoBuilderABC
 
-class Cliente():
+class Client():
 
-    def run(self):
-        living_room_light = LightReceiver()
-        thermostat = ThermostatReceiver()
-        living_room_light_on = LightOnCommand(living_room_light)
-        living_room_light_off = LightOffCommand(living_room_light)
+    def __init__(self) -> None:
+        self.director = AutoDirector()
+        self.autoFord: AutoBuilderABC = FordBuilder()
+        self.autoFiat: AutoBuilderABC = FiatBuilder()
 
-        set_temperature = TemperatureControlCommand(thermostat, 23.0)
-
-        remote = RemoteControlInvoker()
-
-        remote.set_command(living_room_light_on)
-        remote.press_button() 
-        
-        remote.set_command(living_room_light_off)
-        remote.press_button()  
-
-        remote.set_command(set_temperature)
-        remote.press_button()  
+    def run(self) -> None:
+        for constructor in [self.autoFiat, self.autoFord]:
+            self.director.builder = constructor
+            self.director.constructAuto()
+            auto = self.director.builder
+            print(f"Construyendo auto")
+            print(f"Marca: {auto.getMarca()}")
+            print(f"Modelo: {auto.getModelo()}\n")
