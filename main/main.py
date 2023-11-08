@@ -1,18 +1,13 @@
-from main.director import AutoDirector
-from main.builder import FiatBuilder, FordBuilder, AutoBuilderABC
+from main.handler import Bank
 
-class Client():
+class Cliente():
 
-    def __init__(self) -> None:
-        self.director = AutoDirector()
-        self.autoFord: AutoBuilderABC = FordBuilder()
-        self.autoFiat: AutoBuilderABC = FiatBuilder()
-
-    def run(self) -> None:
-        for constructor in [self.autoFiat, self.autoFord]:
-            self.director.builder = constructor
-            self.director.constructAuto()
-            auto = self.director.builder
-            print(f"Construyendo auto")
-            print(f"Marca: {auto.getMarca()}")
-            print(f"Modelo: {auto.getModelo()}\n")
+    def run(self):
+        bank = Bank()
+        while True:
+            try:
+                userInput = int(input("Que cantidad de dinero desea solicitar?  "))
+                bank.requestLoan(userInput)
+                break
+            except ValueError:
+                continue

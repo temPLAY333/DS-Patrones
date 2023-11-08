@@ -1,5 +1,5 @@
-from main import Client
+from main import Cliente
 
-if __name__ == '__main__':
-    client = Client()
-    client.run()
+if __name__ == "__main__":
+    cliente = Cliente()
+    cliente.run()
